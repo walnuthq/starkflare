@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { TxStepsStats, GasSpentStats, TotalUsersStats, BatchesStats, ContractsStats, EntrypointsStats } from '@/components/stats'
+import { TxStepsStats, GasSpentStats, TotalUsersStats, FailedTxs, ContractsStats, EntrypointsStats } from '@/components/stats'
 import Header from '@/components/header'
 import { Flamegraph } from '@/components/flamegraph'
 import Footer from '@/components/footer'
@@ -18,7 +18,7 @@ export default function HomePage() {
 							</h2>
 						</div>
 						<TxStepsStats className="col-span-4" />
-						<BatchesStats className="col-span-3 row-span-2" />
+						<FailedTxs className="col-span-3 row-span-2" />
 						<GasSpentStats className="col-span-4" />
 						<TotalUsersStats className="col-span-2" />
 						<Card className="col-span-2">

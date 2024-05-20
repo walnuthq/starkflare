@@ -32,21 +32,17 @@ const data = [
 		revenue: 11244,
 		subscription: 278,
 	},
-	{
-		revenue: 26475,
-		subscription: 189,
-	},
 ]
 
 export function GasSpentStats({ className }: { className?: string }) {
 	return (
 		<Card className={className}>
 			<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-				<CardTitle className="text-sm font-normal">Subscriptions</CardTitle>
+				<CardTitle className="text-sm font-normal">L1 Gas Spent</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<div className="text-2xl font-bold">+2350</div>
-				<p className="text-xs text-muted-foreground">+180.1% from last month</p>
+				<div className="text-2xl font-bold">17 ETH</div>
+				<p className="text-xs text-muted-foreground">+180.1% from last period</p>
 				<div className="mt-4 h-[80px]">
 					<ResponsiveContainer width="100%" height="100%">
 						<BarChart data={data}>
