@@ -36,3 +36,27 @@ Deployments are handled automatically by [Cloudflare](https://www.cloudflare.com
 
 # 🤗 Contributing 
 Head on to the issues tab to find a list of open contributions. Before making your first contribution, get familiar with our [contributor guidelines](https://github.com/walnuthq/starkflare/issues/12).
+
+## Contributor's chat
+Join us on Telegram here. Do not hesitate to ask any question, we will do our best to answer in the best way we can.
+
+## Coding conventions
+The project is already pre-configured with Eslint, TypeScript, and Prettier. Here are some useful commands you can run to ensure your changes follow the project's coding conventions:
+
+Check for any linting issues and fix:
+
+```
+npm run lint --fix
+```
+
+Check for any TypeScript issues:
+
+```
+npm run typecheck
+```
+
+Sort the `package.json`:
+
+```
+npm run lint:package
+```
