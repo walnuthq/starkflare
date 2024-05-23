@@ -1,6 +1,6 @@
 # 🔥 Starkflare
 
-This tool aims to monitor the resource usage of rollups in the StarkNet ecosystem, starting with StarkNet Mainnet. Its goal is to assist rollup developers in making their rollups cheaper, faster, and more efficient by providing real-time usage patterns of resources such as calldata, storage, and gas consumption.
+This tool aims to monitor the resource usage of rollups in the StarkNet ecosystem, starting with StarkNet Mainnet. Its goal is to assist rollup developers in making their rollups cheaper, faster, and more efficient by providing real-time usage patterns of resources such as calldata, storage, and gas consumption. The indexer backend repository for Starkflare can be found at https://github.com/walnuthq/starkflare-indexer.
 
 # 🙋‍♀️ Collaborate with us on starkflare v1
 
