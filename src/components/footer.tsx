@@ -1,7 +1,7 @@
 const navigation = [
 	{
 		name: 'X',
-		href: '#',
+		href: 'https://x.com/walnut_dev',
 		icon: (props: any) => (
 			<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 				<path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
@@ -10,7 +10,7 @@ const navigation = [
 	},
 	{
 		name: 'GitHub',
-		href: '#',
+		href: 'https://github.com/walnuthq',
 		icon: (props: any) => (
 			<svg fill="currentColor" viewBox="0 0 24 24" {...props}>
 				<path
@@ -21,6 +21,24 @@ const navigation = [
 			</svg>
 		),
 	},
+	{
+		name: 'Telegram',
+		href: 'https://t.me/walnut_dev',
+		icon: (props: any) => (
+			<svg viewBox="0 0 256 256" {...props}>
+				<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+				<g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+				<g id="SVGRepo_iconCarrier">
+					<g fill="none" fillRule="evenodd">
+						<g transform="translate(1.000000, 1.000000)" fillRule="nonzero">
+							<circle fill="currentColor" cx="127.5" cy="127.5" r="127.5"></circle>
+							<path d="M172.415,70.843 L56.311,119.098 C50.362,121.547 50.411,124.927 54.672,126.168 L87.962,136.524 L160.86,89.218 C163.546,87.514 165.935,88.398 163.958,90.189 L105.447,143.633 L103.095,176.293 C105.556,176.293 106.727,175.167 108.247,173.69 L120.469,162.055 L155.007,185.646 C160.207,188.719 164.068,187.204 165.37,181.003 L176.835,76.204 C177.944,71.048 174.769,68.514 172.415,70.843 Z" fill="#FFFFFF"></path>
+						</g>
+					</g>
+				</g>
+			</svg>
+		),
+	}
 ]
 
 export default function Footer() {
@@ -36,7 +54,7 @@ export default function Footer() {
 					))}
 				</div>
 				<div className="mt-8 md:order-1 md:mt-0">
-					<p className="text-center text-xs leading-5 text-gray-500">Made with ❤️ by Walnut</p>
+					<p className="text-center text-sm leading-5 text-gray-500">Made with 🖤 by <a href="https://walnut.dev/" target="_blank" className="underline">Walnut</a></p>
 				</div>
 			</div>
 		</footer>
