@@ -29,7 +29,7 @@ export default function HomePage({ commonStats }: { commonStats: CommonStats }) 
 					</div>
 
 					<div className="mt-28 text-center">
-						<h2 className="text-4xl font-medium">Optimise your rollup's costs</h2>
+						<h2 className="text-4xl font-medium">Optimise your rollup&apos;s costs</h2>
 						<p className="max-w-lg mx-auto mt-6">
 							Find contracts that are consuming the most resources and optimise them. Use the flamechart to find the most expensive parts of transactions and optimise them.
 						</p>
