@@ -45,7 +45,7 @@ Head on to the issues tab to find a list of open contributions. Before making yo
 
 ## Contributor's chat
 
-Join us on Telegram here. Do not hesitate to ask any question, we will do our best to answer in the best way we can.
+Join us on Telegram [here](https://t.me/+DYI4FMia43I1NDI8). Do not hesitate to ask any question, we will do our best to answer in the best way we can.
 
 ## Coding conventions
 
