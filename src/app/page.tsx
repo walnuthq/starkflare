@@ -1,3 +1,5 @@
+export const runtime = 'edge'
+
 import HomePage from '@/components/home-page'
 import { CommonStats } from '@/lib/types'
 import camelcaseKeys from 'camelcase-keys'
