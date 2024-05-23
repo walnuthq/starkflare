@@ -3,8 +3,9 @@ import { TxStepsStats, GasSpentStats, TotalUsersStats, FailedTxs, ContractsStats
 import Header from '@/components/header'
 import { Flamegraph } from '@/components/flamegraph'
 import Footer from '@/components/footer'
+import { CommonStats } from '@/lib/types'
 
-export default function HomePage() {
+export default function HomePage({ commonStats }: { commonStats: CommonStats }) {
 	return (
 		<div className="min-h-screen">
 			<Header />
@@ -20,7 +21,7 @@ export default function HomePage() {
 						<TxStepsStats className="col-span-4" />
 						<FailedTxs className="col-span-3 row-span-2" />
 						<GasSpentStats className="col-span-4" />
-						<TotalUsersStats className="col-span-2" />
+						<TotalUsersStats className="col-span-2" commonStats={commonStats} />
 						<Card className="col-span-2">
 							<CardHeader></CardHeader>
 							<CardContent></CardContent>
