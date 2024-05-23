@@ -10,8 +10,8 @@ export function TotalUsersStats({ className, commonStats }: { className?: string
 			<CardContent>
 				<div className="text-3xl font-semibold mt-10">{commonStats.userStats.uniqueUsersLast7Days}</div>
 				<div className="flex justify-between text-lg font-medium mt-6">
-					<div className="text-green-600">+ {commonStats.userStats.newUsersLast7Days} new</div>
-					<div className="text-red-600">- {commonStats.userStats.lostUsersLast7Days} lost</div>
+					<div className="text-green-600">{commonStats.userStats.newUsersLast7Days} new</div>
+					<div className="text-red-600">{commonStats.userStats.lostUsersLast7Days} lost</div>
 				</div>
 			</CardContent>
 		</Card>

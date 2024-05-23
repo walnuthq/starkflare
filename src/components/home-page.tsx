@@ -13,9 +13,9 @@ export default function HomePage({ commonStats }: { commonStats: CommonStats }) 
 				<div className="container mx-auto">
 					<div className="grid grid-cols-11 gap-4">
 						<div className="col-span-4 p-6 pl-0">
-							<h1 className="text-2xl font-medium">Starkflare</h1>
+							<h1 className="text-2xl font-medium">Resource Monitoring for Rollups</h1>
 							<h2 className="text-lg mt-2">
-								Get insights into your rollup&apos;s costs. Monitor resource usage, find the most expensive bottlenecks, optimise.
+								Get insights into the use of resources like gas, calldata and storage in real-time. Find the most expensive bottlenecks, optimise.
 							</h2>
 						</div>
 						<TxStepsStats className="col-span-4" />
@@ -29,10 +29,9 @@ export default function HomePage({ commonStats }: { commonStats: CommonStats }) 
 					</div>
 
 					<div className="mt-28 text-center">
-						<h2 className="text-4xl font-medium">Tx steps flamegraph</h2>
+						<h2 className="text-4xl font-medium">Optimise your rollup&apos;s costs</h2>
 						<p className="max-w-lg mx-auto mt-6">
-							Below you can find contracts that consumed the highest amount of gas. For each contract, you can drill down to transactions and get a flame chart,
-							to find out which part of the transaction is causing highest number of steps burned.
+							Find contracts that are consuming the most resources and optimise them. Use the flamechart to find the most expensive parts of transactions and optimise them.
 						</p>
 					</div>
 					<div className="flex flex-col mt-10 gap-4">
