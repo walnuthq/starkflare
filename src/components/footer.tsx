@@ -23,7 +23,7 @@ const navigation = [
   },
   {
     name: 'Telegram',
-    href: 'https://t.me/walnut_dev',
+    href: 'https://t.me/+DYI4FMia43I1NDI8',
     icon: (props: any) => (
       <svg viewBox="0 0 256 256" {...props}>
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -62,6 +62,7 @@ export default function Footer() {
             <a
               key={item.name}
               href={item.href}
+			  target="_blank"
               className="text-gray-400 hover:text-gray-500"
             >
               <span className="sr-only">{item.name}</span>
