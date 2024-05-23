@@ -1,16 +1,20 @@
 # 🔥 Starkflare
-This tool aims to monitor the resource usage of rollups in the StarkNet ecosystem, starting with StarkNet Mainnet. Its goal is to assist rollup developers in making their rollups cheaper, faster, and more efficient by providing real-time usage patterns of resources such as calldata, storage, and gas consumption. 
+
+This tool aims to monitor the resource usage of rollups in the StarkNet ecosystem, starting with StarkNet Mainnet. Its goal is to assist rollup developers in making their rollups cheaper, faster, and more efficient by providing real-time usage patterns of resources such as calldata, storage, and gas consumption.
 
 # 🙋‍♀️ Collaborate with us on starkflare v1
+
 Starkflare is initially built for teams working with technologies such as [Madara](https://www.madara.zone/) and [Dojo](https://dojoengine.com/en/). If you are interested in monitoring the resource usage of your rollup, game or dapp, reach out by submitting an Issue on this repository.
 
 # ⚙️ Installation
+
 The app requires the following dependencies:
 
 NodeJS >= 18
 npm
 
 # 👩‍💻 Local Development
+
 For contributing to the project, you can quickly get the application running by following these steps:
 
 Clone this repository:
@@ -32,31 +36,23 @@ npm run dev
 ```
 
 # 🚀 Deploying
+
 Deployments are handled automatically by [Cloudflare](https://www.cloudflare.com/), as soon as your PR is merged to main.
 
-# 🤗 Contributing 
+# 🤗 Contributing
+
 Head on to the issues tab to find a list of open contributions. Before making your first contribution, get familiar with our [contributor guidelines](https://github.com/walnuthq/starkflare/issues/12).
 
 ## Contributor's chat
+
 Join us on Telegram here. Do not hesitate to ask any question, we will do our best to answer in the best way we can.
 
 ## Coding conventions
-The project is already pre-configured with Eslint, TypeScript, and Prettier. Here are some useful commands you can run to ensure your changes follow the project's coding conventions:
 
-Check for any linting issues and fix:
+The project is already pre-configured with Eslint, TypeScript, and Prettier.
 
-```
-npm run lint --fix
-```
-
-Check for any TypeScript issues:
+Check for any linting issues:
 
 ```
-npm run typecheck
-```
-
-Sort the `package.json`:
-
-```
-npm run lint:package
+npm run lint
 ```
