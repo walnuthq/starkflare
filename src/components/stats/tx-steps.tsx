@@ -1,54 +1,57 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Bar, BarChart, Line, LineChart, ResponsiveContainer } from 'recharts'
+import { TransactionStats } from '@/lib/types'
+import { XAxis, Line, Legend, LineChart, ResponsiveContainer } from 'recharts'
 
-const data = [
-  {
-    revenue: 10400,
-    subscription: 10240,
-  },
-  {
-    revenue: 14405,
-    subscription: 10300,
-  },
-  {
-    revenue: 9400,
-    subscription: 8200,
-  },
-  {
-    revenue: 8200,
-    subscription: 7278,
-  },
-  {
-    revenue: 7000,
-    subscription: 10189,
-  },
-  {
-    revenue: 9600,
-    subscription: 10239,
-  },
-  {
-    revenue: 11244,
-    subscription: 10278,
-  },
-  {
-    revenue: 16475,
-    subscription: 7189,
-  },
-]
-
-export function TxStepsStats({ className }: { className?: string }) {
+export function TxStepsStats({
+  className,
+  transactionStats,
+}: {
+  className?: string
+  transactionStats: TransactionStats
+}) {
+  const data = Array.from({ length: 7 }, (_, i) => i).map((i) => {
+    const date = new Date(
+      new Date().setDate(new Date().getDate() - (6 - i) - 1),
+    )
+    return {
+      name: `${date.getDate()}/${date.getMonth() + 1}`,
+      transactionsCount: transactionStats.transactionsCountLast7Days[i],
+      stepsNumber: transactionStats.stepsNumberLast7Days[i] / 100000,
+    }
+  })
+  const transactionsCount = transactionStats.transactionsCountLast7Days.reduce(
+    (previousValue, currentValue) => previousValue + currentValue,
+    0,
+  )
+  const stepsNumber = transactionStats.stepsNumberLast7Days.reduce(
+    (previousValue, currentValue) => previousValue + currentValue,
+    0,
+  )
+  const formatter = Intl.NumberFormat('en', { notation: 'compact' })
   return (
     <Card className={className}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-normal">
-          Transactions Count & Steps Used Placeholder
+          Transactions Count & Steps Used
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">$15,231.89</div>
-        <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+        <div className="flex justify-between">
+          <div>
+            <div className="text-2xl font-bold" style={{ color: '#8884d8' }}>
+              {formatter.format(transactionsCount)}
+            </div>
+            <p className="text-xs text-muted-foreground">Transactions Count</p>
+          </div>
+          <div>
+            <div className="text-2xl font-bold" style={{ color: '#82ca9d' }}>
+              {formatter.format(stepsNumber)}
+            </div>
+            <p className="text-xs text-muted-foreground">Steps Number</p>
+          </div>
+        </div>
         <div className="h-[80px]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -60,31 +63,33 @@ export function TxStepsStats({ className }: { className?: string }) {
                 bottom: 0,
               }}
             >
+              <XAxis dataKey="name" />
+              {/*<Legend />*/}
               <Line
                 type="monotone"
                 strokeWidth={2}
-                dataKey="revenue"
+                dataKey="transactionsCount"
                 activeDot={{
                   r: 6,
-                  style: { fill: 'hsl(var(--primary))', opacity: 0.25 },
+                  style: { fill: '#8884d8', opacity: 0.25 },
                 }}
                 style={
                   {
-                    stroke: 'hsl(var(--primary))',
+                    stroke: '#8884d8',
                   } as React.CSSProperties
                 }
               />
               <Line
                 type="monotone"
                 strokeWidth={2}
-                dataKey="subscription"
+                dataKey="stepsNumber"
                 activeDot={{
                   r: 6,
-                  style: { fill: 'hsl(var(--primary))', opacity: 0.25 },
+                  style: { fill: '#82ca9d', opacity: 0.25 },
                 }}
                 style={
                   {
-                    stroke: 'hsl(var(--primary))',
+                    stroke: '#82ca9d',
                   } as React.CSSProperties
                 }
               />
