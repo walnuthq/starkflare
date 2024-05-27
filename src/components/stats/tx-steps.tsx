@@ -43,13 +43,13 @@ export function TxStepsStats({
             <div className="text-2xl font-bold" style={{ color: '#8884d8' }}>
               {formatter.format(transactionsCount)}
             </div>
-            <p className="text-xs text-muted-foreground">Transactions Count</p>
+            <p className="text-xs text-muted-foreground">Transactions count</p>
           </div>
           <div>
             <div className="text-2xl font-bold" style={{ color: '#82ca9d' }}>
               {formatter.format(stepsNumber)}
             </div>
-            <p className="text-xs text-muted-foreground">Steps Number</p>
+            <p className="text-xs text-muted-foreground">Steps used</p>
           </div>
         </div>
         <div className="h-[80px]">
