@@ -100,3 +100,11 @@
 .select__menu-list::-webkit-scrollbar-track {
   @apply bg-transparent;
 }
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  border-radius: 8px !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip .recharts-tooltip-label {
+  font-weight: 500;
+}

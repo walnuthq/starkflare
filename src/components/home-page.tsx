@@ -47,7 +47,7 @@ export default function HomePage({
               transactionStats={commonStats.transactionStats}
             />
             <FailedTxs className="col-span-3 row-span-2" />
-            <GasSpentStats className="col-span-4" />
+            <GasSpentStats className="col-span-4" commonStats={commonStats} />
             <TotalUsersStats className="col-span-2" commonStats={commonStats} />
             <Card className="col-span-2">
               <CardHeader></CardHeader>
