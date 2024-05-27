@@ -102,7 +102,7 @@
 }
 
 .recharts-tooltip-wrapper .recharts-default-tooltip {
-  border-radius: 8px !important;
+  border-radius: 8px;
 }
 
 .recharts-tooltip-wrapper .recharts-default-tooltip .recharts-tooltip-label {
