@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { TransactionStats } from '@/lib/types'
-import { XAxis, Line, Legend, LineChart, ResponsiveContainer } from 'recharts'
+import { XAxis, Tooltip, Line, LineChart, ResponsiveContainer } from 'recharts'
 
 export function TxStepsStats({
   className,
@@ -43,13 +43,13 @@ export function TxStepsStats({
             <div className="text-2xl font-bold" style={{ color: '#8884d8' }}>
               {formatter.format(transactionsCount)}
             </div>
-            <p className="text-xs text-muted-foreground">Transactions count</p>
+            <p className="text-xs text-muted-foreground">Transactions Count</p>
           </div>
           <div>
             <div className="text-2xl font-bold" style={{ color: '#82ca9d' }}>
               {formatter.format(stepsNumber)}
             </div>
-            <p className="text-xs text-muted-foreground">Steps used</p>
+            <p className="text-xs text-muted-foreground">Steps Used</p>
           </div>
         </div>
         <div className="h-[80px]">
@@ -64,34 +64,36 @@ export function TxStepsStats({
               }}
             >
               <XAxis dataKey="name" />
-              {/*<Legend />*/}
+              <Tooltip
+                formatter={(
+                  value: number,
+                  name: 'transactionsCount' | 'stepsNumber',
+                  props,
+                ) => {
+                  const valuesFormatted = {
+                    transactionsCount: formatter.format(value),
+                    stepsNumber: formatter.format(value * 100000),
+                  }
+                  const namesFormatted = {
+                    transactionsCount: 'Transactions Count',
+                    stepsNumber: 'Steps Used',
+                  }
+                  return [valuesFormatted[name], namesFormatted[name]]
+                }}
+              />
               <Line
                 type="monotone"
                 strokeWidth={2}
                 dataKey="transactionsCount"
-                activeDot={{
-                  r: 6,
-                  style: { fill: '#8884d8', opacity: 0.25 },
-                }}
-                style={
-                  {
-                    stroke: '#8884d8',
-                  } as React.CSSProperties
-                }
+                activeDot={{ r: 6 }}
+                stroke="#8884d8"
               />
               <Line
                 type="monotone"
                 strokeWidth={2}
                 dataKey="stepsNumber"
-                activeDot={{
-                  r: 6,
-                  style: { fill: '#82ca9d', opacity: 0.25 },
-                }}
-                style={
-                  {
-                    stroke: '#82ca9d',
-                  } as React.CSSProperties
-                }
+                activeDot={{ r: 6 }}
+                stroke="#82ca9d"
               />
             </LineChart>
           </ResponsiveContainer>
