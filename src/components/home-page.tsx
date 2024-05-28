@@ -43,7 +43,7 @@ export default function HomePage({
             <TxStepsStats className="col-span-4" />
             <FailedTxs className="col-span-3 row-span-2" />
             <GasSpentStats className="col-span-4" />
-            <TotalUsersStats className="col-span-2" commonStats={commonStats} />
+            {/* <TotalUsersStats className="col-span-2" commonStats={commonStats} /> */}
             <Card className="col-span-2">
               <CardHeader></CardHeader>
               <CardContent></CardContent>
@@ -62,7 +62,7 @@ export default function HomePage({
           </div>
           <div className="flex flex-col mt-10 gap-4">
             <div className="flex flex-row gap-4">
-              <ContractsStats className="basis-1/2" />
+              <ContractsStats commonStats={commonStats} className="basis-1/2" />
               <EntrypointsStats className="basis-1/2" />
             </div>
             <div>

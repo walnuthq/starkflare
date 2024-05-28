@@ -1,6 +1,10 @@
 'use client'
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '../ui/button'
+import { Tooltip as ReactTooltip } from 'react-tooltip'
+import { useState } from 'react'
+import { CommonStats } from '@/lib/types'
 
 const contracts = [
   {
@@ -100,11 +104,19 @@ const sortedContracts = [...contracts].sort(
   (a, b) => b.percentage_consumption - a.percentage_consumption,
 )
 
-let data = sortedContracts.slice(0, 11)
+let data = sortedContracts.slice(0, 10)
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
 
-export function ContractsStats({ className }: { className?: string }) {
+export function ContractsStats({
+  className,
+  commonStats,
+}: {
+  className?: string
+  commonStats: CommonStats
+}) {
+  console.log(commonStats)
+  const [showOthers, setShowOthers] = useState(false)
   const renderTooltipContent = (data: any) => {
     if (data.active && data.payload) {
       const contract = data.payload[0].payload
@@ -135,24 +147,86 @@ export function ContractsStats({ className }: { className?: string }) {
       </CardHeader>
       <CardContent>
         <div className="flex gap-4 justify-between">
-          <div className="h-60 px-2 overflow-y-auto w-full ">
-            {data.map((item, index) => (
-              <div key={`list-box-${index}`} className="flex justify-between">
-                <div key={`list-item-${index}`} className="w-24">
-                  {item.contract_name}
-                </div>
-                <div key={`list-steps-${index}`}>
-                  {item.number_of_steps} steps
-                </div>
-              </div>
-            ))}
+          <div className="w-full">
+            <div className="h-48 overflow-auto">
+              <table className=" px-2  scrollbar:!h-1.5">
+                <thead>
+                  <tr>
+                    <>
+                      <th className="text-left text-xs font-normal text-muted-foreground py-1 px-2">
+                        Contract name
+                      </th>
+                      <th className="text-left text-xs font-normal text-muted-foreground py-1 px-2">
+                        Number of steps
+                      </th>
+                      <th className="text-left text-xs font-normal text-muted-foreground py-1 px-2">
+                        Percentage consumption
+                      </th>
+                    </>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedContracts.map((item, index) =>
+                    index < 10 || showOthers ? (
+                      <tr key={`list-box-${index}`}>
+                        <>
+                          <td key={`list-item-${index}`}>
+                            <div
+                              className="underline py-1 px-2 cursor-pointer"
+                              data-tooltip-id={item.address}
+                              data-tooltip-content={item.address}
+                              onClick={() =>
+                                window.navigator.clipboard.writeText(
+                                  item.address,
+                                )
+                              }
+                            >
+                              {item.contract_name}
+                              <div>
+                                <ReactTooltip
+                                  style={{ zIndex: '100' }}
+                                  key={item.address}
+                                  className="tooltip"
+                                  id={item.address}
+                                />
+                              </div>
+                            </div>
+                          </td>
+                          <td key={`list-steps-${index}`} className="py-1 px-2">
+                            {item.number_of_steps} steps
+                          </td>
+                          <td
+                            key={`list-percentage-${index}`}
+                            className="py-1 px-2"
+                          >
+                            {item.percentage_consumption}
+                          </td>
+                        </>
+                      </tr>
+                    ) : null,
+                  )}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-2 flex justify-center">
+              {sortedContracts.length > 10 && (
+                <Button
+                  onClick={() => setShowOthers(!showOthers)}
+                  variant={'link'}
+                >
+                  {showOthers ? 'Hide others' : 'Others'}
+                </Button>
+              )}
+            </div>
           </div>
-          <ResponsiveContainer width={400} height={200}>
+
+          <ResponsiveContainer width={300} height={200}>
             <PieChart>
               <Pie
+                cy={95}
                 data={data}
                 labelLine={false}
-                outerRadius={160}
+                outerRadius={150}
                 fill="#8884d8"
                 dataKey="percentage_consumption"
               >
