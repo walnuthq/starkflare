@@ -11,6 +11,16 @@ export function TxStepsStats({
   className?: string
   transactionStats: TransactionStats
 }) {
+  const transactionsCountMin = Math.min(
+    ...transactionStats.transactionsCountLast7Days,
+  )
+  const transactionsCountMax = Math.max(
+    ...transactionStats.transactionsCountLast7Days,
+  )
+  const transactionsCountRange = transactionsCountMax - transactionsCountMin
+  const stepsNumberMin = Math.min(...transactionStats.stepsNumberLast7Days)
+  const stepsNumberMax = Math.max(...transactionStats.stepsNumberLast7Days)
+  const stepsNumberRange = stepsNumberMax - stepsNumberMin
   const data = Array.from({ length: 7 }, (_, i) => i).map((i) => {
     const date = new Date(
       new Date().setDate(new Date().getDate() - (6 - i) - 1),
@@ -18,7 +28,14 @@ export function TxStepsStats({
     return {
       name: `${date.getDate()}/${date.getMonth() + 1}`,
       transactionsCount: transactionStats.transactionsCountLast7Days[i],
-      stepsNumber: transactionStats.stepsNumberLast7Days[i] / 100000,
+      transactionsCountNormalized:
+        (transactionStats.transactionsCountLast7Days[i] -
+          transactionsCountMin) /
+        transactionsCountRange,
+      stepsNumber: transactionStats.stepsNumberLast7Days[i],
+      stepsNumberNormalized:
+        (transactionStats.stepsNumberLast7Days[i] - stepsNumberMin) /
+        stepsNumberRange,
     }
   })
   const transactionsCount = transactionStats.transactionsCountLast7Days.reduce(
@@ -67,16 +84,20 @@ export function TxStepsStats({
               <Tooltip
                 formatter={(
                   value: number,
-                  name: 'transactionsCount' | 'stepsNumber',
+                  name: 'transactionsCountNormalized' | 'stepsNumberNormalized',
                   props,
                 ) => {
                   const valuesFormatted = {
-                    transactionsCount: formatter.format(value),
-                    stepsNumber: formatter.format(value * 100000),
+                    transactionsCountNormalized: formatter.format(
+                      props.payload.transactionsCount,
+                    ),
+                    stepsNumberNormalized: formatter.format(
+                      props.payload.stepsNumber,
+                    ),
                   }
                   const namesFormatted = {
-                    transactionsCount: 'Transactions Count',
-                    stepsNumber: 'Steps Used',
+                    transactionsCountNormalized: 'Transactions Count',
+                    stepsNumberNormalized: 'Steps Used',
                   }
                   return [valuesFormatted[name], namesFormatted[name]]
                 }}
@@ -84,14 +105,14 @@ export function TxStepsStats({
               <Line
                 type="monotone"
                 strokeWidth={2}
-                dataKey="transactionsCount"
+                dataKey="transactionsCountNormalized"
                 activeDot={{ r: 6 }}
                 stroke="#8884d8"
               />
               <Line
                 type="monotone"
                 strokeWidth={2}
-                dataKey="stepsNumber"
+                dataKey="stepsNumberNormalized"
                 activeDot={{ r: 6 }}
                 stroke="#82ca9d"
               />
