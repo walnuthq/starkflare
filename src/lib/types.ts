@@ -13,3 +13,15 @@ export interface CommonStats {
   userStats: UserStats
   transactionStats: TransactionStats
 }
+
+export interface Entrypoint {
+  name: string
+  steps: number
+  usage: number
+}
+
+export interface Transaction {
+  hash: string
+  steps: number
+  timestamp: number
+}
