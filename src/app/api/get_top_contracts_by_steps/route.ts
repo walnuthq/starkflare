@@ -1,49 +1,76 @@
 // Import NextRequest from 'next/server'
-import type { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server'
 
 // Define your edge function
-export const runtime = 'edge';
+export const runtime = 'edge'
+
+interface Contract {
+  contract_address: string
+  steps_number: bigint
+  steps_percentage: number
+}
+
+async function fetchContractName(
+  contract_address: string,
+): Promise<string | null> {
+  try {
+    const response = await fetch(
+      `https://api.voyager.online/beta/contracts/${encodeURIComponent(contract_address)}`,
+    )
+    if (!response.ok) {
+      return null
+    }
+    const data = await response.json()
+    const contractAlias = (data as { contractAlias: string | null })
+      .contractAlias
+    return contractAlias
+  } catch (error) {
+    console.error('Error fetching contract name:', error)
+    return null
+  }
+}
 
 export async function GET(request: NextRequest) {
   try {
-    // Attempt to fetch data from an external API
-    const response = await fetch('http://127.0.0.1:3000/rpc/get_top_contracts_by_steps');
+    const response = await fetch(
+      'http://127.0.0.1:3000/rpc/get_top_contracts_by_steps',
+    )
     if (!response.ok) {
-      // If the response is not ok, throw an error
-      throw new Error(`HTTP error status: ${response.status}`);
+      throw new Error(`HTTP error status: ${response.status}`)
     }
-    const data = await response.json();
+    const data: Contract[] = await response.json()
 
-    // Construct and return the response
-    return new Response(JSON.stringify(data), {
+    const enhancedData = await Promise.all(
+      data.map(async (contract) => {
+        const contractAlias = await fetchContractName(contract.contract_address)
+        return { ...contract, contract_name: contractAlias }
+      }),
+    )
+
+    return new Response(JSON.stringify(enhancedData), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    })
   } catch (error) {
-    // Catch any errors during the fetch operation or processing
-    console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error)
 
-    // Determine the appropriate response based on the error
-    let statusCode = 500; // Default to Internal Server Error
-    let responseBody;
+    let statusCode = 500
+    let responseBody
 
     if (error instanceof Error && error.message.includes('HTTP')) {
-      // If the error is due to an HTTP issue, extract the status code
-      statusCode = parseInt(error.message.split(': ')[1], 10);
-      responseBody = { message: 'An error occurred while fetching data.' };
+      statusCode = parseInt(error.message.split(': ')[1], 10)
+      responseBody = { message: 'An error occurred while fetching data.' }
     } else {
-      // For other errors, provide a generic message
-      responseBody = { message: 'An unexpected error occurred.' };
+      responseBody = { message: 'An unexpected error occurred.' }
     }
 
-    // Return an error response
     return new Response(JSON.stringify(responseBody), {
       status: statusCode,
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    })
   }
 }
