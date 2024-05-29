@@ -1,4 +1,11 @@
 import Image from 'next/image'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 export default function Header() {
   return (
@@ -18,28 +25,18 @@ export default function Header() {
           <a href="/">About</a>
           <a href="/">FAQ</a>
         </div>
-        <div className="flex items-center flex-row gap-8">
+        <div className="flex flex-row gap-8 items-center">
           <div>Network: Starknet Mainnet</div>
-          <div className="relative inline-block text-left group">
-            <div className="relative">
-              <select
-                className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md bg-gray-100 cursor-not-allowed"
-                disabled
-              >
-                <option>7 days</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                <svg
-                  className="h-5 w-5 text-gray-400"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M7 7l3-3 3 3m0 6l-3 3-3-3" />
-                </svg>
-              </div>
-            </div>
-            <div className="absolute top-full mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg p-2 text-sm text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+          <div className="relative inline-block group">
+            <Select>
+              <SelectTrigger className="w-[180px]" disabled>
+                <SelectValue placeholder="7 days" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="7">7 days</SelectItem>
+              </SelectContent>
+            </Select>
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-gray-700 text-white text-center rounded-lg py-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none text-sm">
               Currently only 7 day time frame is supported.
             </div>
           </div>
