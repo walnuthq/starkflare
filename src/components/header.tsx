@@ -6,6 +6,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 export default function Header() {
   return (
@@ -28,17 +34,23 @@ export default function Header() {
         <div className="flex flex-row gap-8 items-center">
           <div>Network: Starknet Mainnet</div>
           <div className="relative inline-block group">
-            <Select>
-              <SelectTrigger className="w-[180px]" disabled>
-                <SelectValue placeholder="7 days" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="7">7 days</SelectItem>
-              </SelectContent>
-            </Select>
-            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-gray-700 text-white text-center rounded-lg py-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none text-sm">
-              Currently only 7 day time frame is supported.
-            </div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Select>
+                    <SelectTrigger className="w-[180px]" disabled>
+                      <SelectValue placeholder="7 days" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="7">7 days</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Currently only 7 day time frame is supported.</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </div>
       </div>
