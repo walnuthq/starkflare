@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui'
 import { CommonTooltip } from '@/components/common/tooltip'
 import { EntrypointsStackedBarChart } from '@/components/stats/entrypoints-stacked-bar-chart'
-import { formatNumber } from '@/lib/utils'
+import { formatCompactNumber } from '@/lib/utils'
 import { Entrypoint } from '@/lib/types'
 import { EntrypointColors } from '@/lib/constants'
 
@@ -53,7 +53,7 @@ export function EntrypointsSection(props: EntrypointsSectionProps) {
                           asChild
                           tooltipMessage={`${entrypoint.steps.toLocaleString()} steps`}
                         >
-                          <p>{`${formatNumber(entrypoint.steps)} steps`}</p>
+                          <p>{`${formatCompactNumber(entrypoint.steps)} steps`}</p>
                         </CommonTooltip>
                       </TableCell>
                       <TableCell className="text-right">{`${entrypoint.usage}%`}</TableCell>

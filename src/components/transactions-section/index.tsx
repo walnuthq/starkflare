@@ -9,7 +9,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { CommonTooltip } from '../common/tooltip'
 import { CommonSelect } from '@/components/common/select'
-import { copyToClipboard, formatNumber } from '@/lib/utils'
+import { copyToClipboard, formatCompactNumber } from '@/lib/utils'
 import { Entrypoint, Transaction } from '@/lib/types'
 import { useEffect, useState } from 'react'
 
@@ -153,7 +153,7 @@ export function TransactionsSection(props: TransactionsSectionProps) {
                             asChild
                             tooltipMessage={`${transaction.steps.toLocaleString()} steps`}
                           >
-                            <p>{`${formatNumber(transaction.steps)} steps`}</p>
+                            <p>{`${formatCompactNumber(transaction.steps)} steps`}</p>
                           </CommonTooltip>
                         </TableCell>
                         <TableCell className="text-right">
