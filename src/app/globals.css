@@ -74,3 +74,29 @@
     @apply bg-background text-foreground;
   }
 }
+/*
+ * Scroll bars
+ */
+.pane::-webkit-scrollbar,
+.select__menu-list::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+.pane::-webkit-scrollbar-thumb,
+.select__menu-list::-webkit-scrollbar-thumb {
+  @apply rounded bg-clip-padding border-2 border-transparent;
+}
+
+.pane.pane-light::-webkit-scrollbar-thumb,
+.select__menu-list::-webkit-scrollbar-thumb {
+  @apply bg-gray-200/50 hover:bg-gray-300/75 dark:bg-black/50 dark:hover:bg-black/75;
+}
+
+.pane.pane-dark::-webkit-scrollbar-thumb {
+  @apply bg-gray-700/50 hover:bg-gray-600/75 dark:bg-black/50 dark:hover:bg-black/75;
+}
+
+.pane::-webkit-scrollbar-track,
+.select__menu-list::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}

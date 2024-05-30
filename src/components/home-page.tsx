@@ -18,6 +18,7 @@ import Header from '@/components/header'
 import { Flamegraph } from '@/components/flamegraph'
 import Footer from '@/components/footer'
 import { CommonStats } from '@/lib/types'
+import { Toaster } from '@/components/ui/toaster'
 
 export default function HomePage({
   commonStats,
@@ -43,7 +44,7 @@ export default function HomePage({
             <TxStepsStats className="col-span-4" />
             <FailedTxs className="col-span-3 row-span-2" />
             <GasSpentStats className="col-span-4" />
-            {/* <TotalUsersStats className="col-span-2" commonStats={commonStats} /> */}
+            <TotalUsersStats className="col-span-2" commonStats={commonStats} />
             <Card className="col-span-2">
               <CardHeader></CardHeader>
               <CardContent></CardContent>
@@ -71,6 +72,7 @@ export default function HomePage({
           </div>
         </div>
       </main>
+      <Toaster />
       <Footer />
     </div>
   )
