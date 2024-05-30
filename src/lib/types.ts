@@ -4,6 +4,7 @@ export interface UserStats {
   lostUsersLast7Days: number
 }
 
+
 export interface ContractBySteps {
   contractName?: string
   contractAddress: string
@@ -11,7 +12,14 @@ export interface ContractBySteps {
   stepsPercentage: number
 }
 
+export interface TransactionStats {
+  transactionsCountLast7Days: number[]
+  stepsNumberLast7Days: number[]
+
+}
+
 export interface CommonStats {
   userStats: UserStats
   topContractsBySteps: ContractBySteps[]
+  transactionStats: TransactionStats
 }

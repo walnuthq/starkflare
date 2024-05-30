@@ -41,7 +41,10 @@ export default function HomePage({
                 optimise.
               </h2>
             </div>
-            <TxStepsStats className="col-span-4" />
+            <TxStepsStats
+              className="col-span-4"
+              transactionStats={commonStats.transactionStats}
+            />
             <FailedTxs className="col-span-3 row-span-2" />
             <GasSpentStats className="col-span-4" />
             <TotalUsersStats className="col-span-2" commonStats={commonStats} />
