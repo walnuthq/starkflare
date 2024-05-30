@@ -7,6 +7,7 @@ export interface UserStats {
 export interface L1GasSpent {
   date: string
   l1DataGas: number
+  l1Gas: number
 }
 
 export interface TransactionStats {
@@ -23,7 +24,7 @@ export interface ContractStats {
 
 export interface CommonStats {
   userStats: UserStats
-  l1DataGasStats: L1GasSpent[]
+  l1GasStats: L1GasSpent[]
   transactionStats: TransactionStats
   topContractsBySteps: ContractStats[]
 }

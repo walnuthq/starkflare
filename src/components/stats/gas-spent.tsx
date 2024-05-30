@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CommonStats, L1GasSpent } from '@/lib/types'
 import {
   capitalise,
+  cn,
   formatCompactNumber,
   getDayStringFromDate,
   getUTCDateRange,
@@ -45,12 +46,12 @@ export function GasSpentStats({
   commonStats: CommonStats
 }) {
   const { total, transformed } = useMemo(
-    () => getTransformedData(commonStats?.l1DataGasStats ?? []),
-    [commonStats?.l1DataGasStats],
+    () => getTransformedData(commonStats?.l1GasStats ?? []),
+    [commonStats?.l1GasStats],
   )
 
   return (
-    <Card className={className}>
+    <Card className={cn('flex flex-col', className)}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-normal flex justify-between items-center w-full">
           L1 Gas Spent
@@ -62,13 +63,13 @@ export function GasSpentStats({
           </CommonTooltip>
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col flex-grow">
         <div className="text-2xl font-bold">
           <CommonTooltip tooltipMessage={`${total} ETH`}>
             {formatCompactNumber(total)} ETH
           </CommonTooltip>
         </div>
-        <div className="mt-4 h-[80px]">
+        <div className="mt-4 flex-grow">
           <ResponsiveContainer width="100%" height="100%" debounce={1500}>
             <BarChart data={transformed} margin={{ bottom: 0 }}>
               <XAxis
