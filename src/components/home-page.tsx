@@ -19,6 +19,7 @@ import { Flamegraph } from '@/components/flamegraph'
 import Footer from '@/components/footer'
 import { CommonStats } from '@/lib/types'
 import { Toaster } from '@/components/ui/toaster'
+import ContributeBox from "./ContributeBox";
 
 export default function HomePage({
   commonStats,
@@ -75,8 +76,9 @@ export default function HomePage({
           </div>
         </div>
       </main>
+      <ContributeBox />
       <Toaster />
       <Footer />
     </div>
-  )
+  );
 }
