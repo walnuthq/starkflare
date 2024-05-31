@@ -66,7 +66,7 @@ export async function fetchEntrypoints(
 async function fetchEntrypointsWithCaching(
   contractAddress: string,
 ): Promise<Entrypoints> {
-  const ENTRYPOINTS_KEY = 'entrypoints'
+  const ENTRYPOINTS_KEY = `entrypoints-${contractAddress}`
   const redis = new Redis({
     url: process.env.UPSTASH_URL,
     token: process.env.UPSTASH_TOKEN,
