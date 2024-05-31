@@ -54,10 +54,7 @@ export function ContractsBurningMostStepsTable({
           <TableRow key={`table-row-${index}`}>
             <>
               <TableCell key={`table-item-${index}`}>
-                <TooltipProvider
-                  key={`tooltip-provider-${index}`}
-                  delayDuration={100}
-                >
+                <TooltipProvider key={`tooltip-provider-${index}`}>
                   <Tooltip key={`tooltip-${index}`}>
                     <TooltipTrigger key={`tooltip-trigger-${index}`}>
                       <div

@@ -1,8 +1,8 @@
 'use client'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CommonStats } from '@/lib/types'
-import ContractsBurningMostStepsTable from '../ContractsBurningMostStepsTable'
-import { ContractsPieChart } from '../ContractsPieChart'
+import ContractsBurningMostStepsTable from './contracts/ContractsBurningMostStepsTable'
+import { ContractsPieChart } from './contracts/ContractsPieChart'
 
 const COLORS = [
   '#0088FE',
