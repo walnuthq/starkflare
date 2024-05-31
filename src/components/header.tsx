@@ -34,23 +34,23 @@ export default function Header() {
         <div className="flex flex-row gap-8 items-center">
           <div>Network: Starknet Mainnet</div>
           <div className="relative inline-block group">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Select>
+            <Select>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
                     <SelectTrigger className="w-[180px]" disabled>
                       <SelectValue placeholder="7 days" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="7">7 days</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Currently only 7 day time frame is supported.</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+                  </TooltipTrigger>
+                  <SelectContent>
+                    <SelectItem value="7">7 days</SelectItem>
+                  </SelectContent>
+                  <TooltipContent>
+                    <p>Currently only 7 day time frame is supported.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </Select>
           </div>
         </div>
       </div>
