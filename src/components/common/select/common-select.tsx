@@ -30,7 +30,7 @@ export function CommonSelect(props: Props) {
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       {/* set a common max height for dropdown */}
-      <SelectContent className="max-h-56 overflow-y-auto">
+      <SelectContent>
         <SelectGroup>
           {contents.map((content) => {
             return (
