@@ -45,6 +45,7 @@ export function EntrypointsStackedBarChart({
             {Object.keys(graphData).map((data: string, index: number) => {
               return (
                 <Bar
+                  key={index}
                   dataKey={data}
                   stackId="a"
                   radius={

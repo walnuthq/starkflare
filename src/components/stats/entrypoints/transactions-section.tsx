@@ -13,7 +13,7 @@ import { CommonTooltip } from '@/components/common/tooltip'
 import { CommonSelect } from '@/components/common/select'
 import { copyToClipboard, formatCompactNumber } from '@/lib/utils'
 import { EntrypointData, Transaction } from '@/lib/types'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 dayjs.extend(relativeTime) // enable plugin to use fromNow() functionality
 
@@ -76,6 +76,8 @@ type TransactionsSectionProps = {
 
 export function TransactionsSection(props: TransactionsSectionProps) {
   const { entrypoints } = props
+  const hasRunOnce = useRef(false)
+
   const [loading, setLoading] = useState<boolean>(true)
   const [transactions, setTransactions] =
     useState<Transaction[]>(sampleTransactions) // currently defaulted to sample data
@@ -100,8 +102,11 @@ export function TransactionsSection(props: TransactionsSectionProps) {
 
   useEffect(() => {
     // pre selected first entrypoint in the list on initial render
-    if (entrypoints.length !== 0) onEntrypointSelect(entrypoints[0].name)
-  }, [])
+    if (entrypoints.length !== 0 && !hasRunOnce.current) {
+      onEntrypointSelect(entrypoints[0].name)
+      hasRunOnce.current = true // Mark that the effect has run once
+    }
+  }, [entrypoints])
 
   return (
     <div className=" flex flex-col w-full h-full overflow-y-auto styled-scrollbar">

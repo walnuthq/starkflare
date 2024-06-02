@@ -36,9 +36,10 @@ export function CommonSelect(props: Props) {
             return (
               <>
                 {content.label && <SelectLabel>{content.label}</SelectLabel>}
-                {content.items.map((item) => {
+                {content.items.map((item, index) => {
                   return (
                     <SelectItem
+                      key={index}
                       className="cursor-pointer"
                       value={item.toLowerCase()}
                     >

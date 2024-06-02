@@ -10,7 +10,13 @@ import { InputExtended } from '@/components/common/input'
 import { ArrowRightIcon } from '@radix-ui/react-icons'
 import { EntrypointData } from '@/lib/types'
 import { CARMINE_CONTRACT_ADDRESS } from '@/lib/constants'
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { EntrypointsSection } from '@/components/stats/entrypoints'
 import { TransactionsSection } from './transactions-section'
 
@@ -97,7 +103,7 @@ export function EntrypointsStats({ className }: { className?: string }) {
     }
   }
 
-  const fetchEntrypointsAndTransactions = () => {
+  const fetchEntrypointsAndTransactions = useCallback(() => {
     setLoading(true)
     // API call to fetch entrypoints + transactions data by submitting this contract address
     // use setFormErrors to display errors in input data
@@ -109,12 +115,12 @@ export function EntrypointsStats({ className }: { className?: string }) {
           : '',
     }))
     setLoading(false)
-  }
+  }, [formData.contractAddress])
 
   useEffect(() => {
     // calling the API to fetch entrypoints + transactions data during initial render with default contract address (Carmine)
     fetchEntrypointsAndTransactions()
-  }, [])
+  }, [fetchEntrypointsAndTransactions])
 
   return (
     <Card className={className}>
