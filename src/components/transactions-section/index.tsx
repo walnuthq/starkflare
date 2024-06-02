@@ -10,7 +10,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { CommonTooltip } from '../common/tooltip'
 import { CommonSelect } from '@/components/common/select'
 import { copyToClipboard, formatCompactNumber } from '@/lib/utils'
-import { Entrypoint, Transaction } from '@/lib/types'
+import { EntrypointData, Transaction } from '@/lib/types'
 import { useEffect, useState } from 'react'
 
 dayjs.extend(relativeTime) // enable plugin to use fromNow() functionality
@@ -69,7 +69,7 @@ const sampleTransactions: Transaction[] = [
 ]
 
 type TransactionsSectionProps = {
-  entrypoints: Entrypoint[]
+  entrypoints: EntrypointData[]
 }
 
 export function TransactionsSection(props: TransactionsSectionProps) {
@@ -115,7 +115,7 @@ export function TransactionsSection(props: TransactionsSectionProps) {
               onValueChange={onEntrypointSelect}
               contents={[
                 {
-                  items: entrypoints.map((entrypoint: Entrypoint) => {
+                  items: entrypoints.map((entrypoint: EntrypointData) => {
                     return entrypoint.name
                   }),
                 },

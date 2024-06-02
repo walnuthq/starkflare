@@ -14,7 +14,7 @@ export interface CommonStats {
   transactionStats: TransactionStats
 }
 
-export interface Entrypoint {
+export interface EntrypointData {
   name: string
   steps: number
   usage: number

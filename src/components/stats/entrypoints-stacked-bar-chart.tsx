@@ -8,13 +8,13 @@ import {
   Tooltip,
 } from 'recharts'
 import { cn } from '@/lib/utils'
-import { Entrypoint } from '@/lib/types'
+import { EntrypointData } from '@/lib/types'
 import { EntrypointColors } from '@/lib/constants'
 import { HTMLAttributes } from 'react'
 
 type BaseProps = {
   className: string
-  data: Entrypoint[]
+  data: EntrypointData[]
 }
 
 type EntrypointsStackedBarChartProps = BaseProps &
@@ -26,7 +26,7 @@ export function EntrypointsStackedBarChart({
   ...props
 }: EntrypointsStackedBarChartProps) {
   const graphData = data.reduce(
-    (acc: Record<string, number>, curr: Entrypoint) => {
+    (acc: Record<string, number>, curr: EntrypointData) => {
       acc[curr.name] = curr.steps
       return acc
     },

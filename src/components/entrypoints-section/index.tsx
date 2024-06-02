@@ -2,11 +2,11 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui'
 import { CommonTooltip } from '@/components/common/tooltip'
 import { EntrypointsStackedBarChart } from '@/components/stats/entrypoints-stacked-bar-chart'
 import { formatCompactNumber } from '@/lib/utils'
-import { Entrypoint } from '@/lib/types'
+import { EntrypointData } from '@/lib/types'
 import { EntrypointColors } from '@/lib/constants'
 
 type EntrypointsSectionProps = {
-  entrypoints: Entrypoint[]
+  entrypoints: EntrypointData[]
 }
 
 export function EntrypointsSection(props: EntrypointsSectionProps) {
@@ -32,7 +32,7 @@ export function EntrypointsSection(props: EntrypointsSectionProps) {
             <Table>
               <TableBody>
                 {sortedEntrypoints.map(
-                  (entrypoint: Entrypoint, index: number) => (
+                  (entrypoint: EntrypointData, index: number) => (
                     <TableRow key={entrypoint.name} className="cursor-pointer">
                       <TableCell>
                         <p className="flex items-center">

@@ -8,14 +8,14 @@ import {
 } from '@/components/ui'
 import { InputExtended } from '@/components/common/input'
 import { ArrowRightIcon } from '@radix-ui/react-icons'
-import { Entrypoint } from '@/lib/types'
+import { EntrypointData } from '@/lib/types'
 import { CARMINE_CONTRACT_ADDRESS } from '@/lib/constants'
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 
 import { TransactionsSection } from '../transactions-section'
 import { EntrypointsSection } from '../entrypoints-section'
 
-const sampleEntrypoints: Entrypoint[] = [
+const sampleEntrypoints: EntrypointData[] = [
   {
     name: 'swap1',
     steps: 127347,
@@ -79,7 +79,7 @@ type EntrypointFormErrors = {
 export function EntrypointsStats({ className }: { className?: string }) {
   const [loading, setLoading] = useState<boolean>(true)
   const [entrypoints, setEntrypoints] =
-    useState<Entrypoint[]>(sampleEntrypoints) // currently defaulted to sample data
+    useState<EntrypointData[]>(sampleEntrypoints) // currently defaulted to sample data
   const [formData, setFormData] = useState<EntrypointFormData>({
     contractAddress: CARMINE_CONTRACT_ADDRESS, // currently defaulted to carmine contract address
   })
