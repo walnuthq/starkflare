@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui'
 import { CommonTooltip } from '@/components/common/tooltip'
-import { EntrypointsStackedBarChart } from '@/components/stats/entrypoints-stacked-bar-chart'
+import { EntrypointsStackedBarChart } from '@/components/stats/entrypoints/entrypoints-stacked-bar-chart'
 import { formatCompactNumber } from '@/lib/utils'
 import { EntrypointData } from '@/lib/types'
 import { EntrypointColors } from '@/lib/constants'

@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Skeleton,
   Table,
@@ -7,7 +9,7 @@ import {
 } from '@/components/ui'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { CommonTooltip } from '../common/tooltip'
+import { CommonTooltip } from '@/components/common/tooltip'
 import { CommonSelect } from '@/components/common/select'
 import { copyToClipboard, formatCompactNumber } from '@/lib/utils'
 import { EntrypointData, Transaction } from '@/lib/types'

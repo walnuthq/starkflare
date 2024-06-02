@@ -12,13 +12,13 @@ import {
   TotalUsersStats,
   FailedTxs,
   ContractsStats,
-  EntrypointsStats,
-} from "@/components/stats";
-import Header from "@/components/header";
-import { Flamegraph } from "@/components/flamegraph";
-import Footer from "@/components/footer";
-import { CommonStats } from "@/lib/types";
-import ContributeBox from "./ContributeBox";
+} from '@/components/stats'
+import Header from '@/components/header'
+import { Flamegraph } from '@/components/flamegraph'
+import Footer from '@/components/footer'
+import { CommonStats } from '@/lib/types'
+import ContributeBox from './ContributeBox'
+import { EntrypointsStats } from '@/components/stats/entrypoints'
 
 export default function HomePage({
   commonStats,
@@ -78,5 +78,5 @@ export default function HomePage({
       <ContributeBox />
       <Footer />
     </div>
-  );
+  )
 }

@@ -11,9 +11,8 @@ import { ArrowRightIcon } from '@radix-ui/react-icons'
 import { EntrypointData } from '@/lib/types'
 import { CARMINE_CONTRACT_ADDRESS } from '@/lib/constants'
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
-
-import { TransactionsSection } from '../transactions-section'
-import { EntrypointsSection } from '../entrypoints-section'
+import { EntrypointsSection } from '@/components/stats/entrypoints'
+import { TransactionsSection } from './transactions-section'
 
 const sampleEntrypoints: EntrypointData[] = [
   {
