@@ -1,4 +1,4 @@
-import { Label } from '@/components/ui'
+import { Input, Label } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import React from 'react'
 
@@ -55,17 +55,18 @@ const InputExtended = React.forwardRef<HTMLInputElement, InputProps>(
         <div className="flex flex-col gap-3 flex-grow">
           <div
             className={cn(
-              'flex h-8 items-center text-sm flex-grow rounded-lg border border-input ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1',
-              disabled && 'opacity-50 cursor-not-allowed pointer-events-none',
+              'flex h-8 items-center text-sm flex-grow',
+              disabled &&
+                'rounded-lg opacity-50 cursor-not-allowed pointer-events-none',
               error && 'border-red-500',
             )}
           >
             {adornment && adornment.left && (
-              <div className="ml-3 flex-none flex items-center">
+              <div className="mr-3 flex-none flex items-center">
                 {adornment.left}
               </div>
             )}
-            <input
+            <Input
               required={required}
               type={type}
               className={cn(
@@ -77,7 +78,7 @@ const InputExtended = React.forwardRef<HTMLInputElement, InputProps>(
               {...props}
             />
             {adornment && adornment.right && (
-              <div className="mr-3 flex items-center flex-none">
+              <div className="ml-3 flex items-center flex-none">
                 {adornment.right}
               </div>
             )}
