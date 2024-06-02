@@ -24,7 +24,7 @@ export function EntrypointsSection(props: EntrypointsSectionProps) {
 
             <EntrypointsStackedBarChart
               data={sortedEntrypoints}
-              className="mt-2"
+              className="my-3"
             />
           </div>
 
