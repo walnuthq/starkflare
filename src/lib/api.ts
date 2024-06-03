@@ -1,5 +1,10 @@
 import { Redis } from '@upstash/redis'
-import { CommonStats, RawEntrypoints, Entrypoints } from './types'
+import {
+  CommonStats,
+  ContractStats,
+  RawEntrypoints,
+  Entrypoints,
+} from './types'
 import camelcaseKeys from 'camelcase-keys'
 import { RpcProvider, constants, Contract, hash } from 'starknet'
 
@@ -33,9 +38,11 @@ async function fetchCommonStatsWithCaching(): Promise<CommonStats> {
     cache: 'no-store',
   })
 
-  const commonStats: CommonStats = camelcaseKeys((await res.json()) as any, {
+  let commonStats: CommonStats = camelcaseKeys((await res.json()) as any, {
     deep: true,
   })
+
+  commonStats = await updateContractNamesInCommonStats(commonStats)
 
   await redis.setex(
     COMMON_STATS_KEY,
@@ -133,4 +140,35 @@ async function fetchEntrypointsWithoutCaching(
     },
   )
   return (await res.json()) as Entrypoints
+}
+
+async function updateContractNamesInCommonStats(
+  commonStats: CommonStats,
+): Promise<CommonStats> {
+  const contractStats: ContractStats[] = commonStats.topContractsBySteps ?? []
+
+  const updatedContracts = await Promise.all(
+    contractStats?.map(async (contractStat) => {
+      const contractName = await fetchContractName(contractStat.contractAddress)
+      return { ...contractStat, contractName: contractName }
+    }),
+  )
+
+  return { ...commonStats, topContractsBySteps: updatedContracts }
+}
+
+async function fetchContractName(
+  contract_address: string,
+): Promise<string | null> {
+  if (!process.env.VOYAGER_API_KEY) return null
+  const response = await fetch(
+    `https://api.voyager.online/beta/contracts/${contract_address}`,
+    { headers: { 'X-API-Key': process.env.VOYAGER_API_KEY } },
+  )
+  if (!response.ok) {
+    return null
+  }
+  const data = await response.json()
+  const contractAlias = (data as { contractAlias: string | null }).contractAlias
+  return contractAlias
 }
