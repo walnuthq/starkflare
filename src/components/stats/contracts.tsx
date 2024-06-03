@@ -1,6 +1,6 @@
 'use client'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { CommonStats } from '@/lib/types'
+import { CommonStats, ContractStats } from '@/lib/types'
 import ContractsBurningMostStepsTable from './contracts/ContractsBurningMostStepsTable'
 import { ContractsPieChart } from './contracts/ContractsPieChart'
 
@@ -30,7 +30,7 @@ export function ContractsStats({
     {
       contractName: 'Others',
       contractAddress: 'Others',
-      stepsNumber: 0,
+      stepsNumber: BigInt(0),
       stepsPercentage:
         100 -
         commonStats.topContractsBySteps.reduce(

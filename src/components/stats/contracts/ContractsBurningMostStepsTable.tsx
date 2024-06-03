@@ -13,24 +13,24 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { toast, useToast } from '@/components/ui/use-toast'
-import { ContractBySteps } from '@/lib/types'
+import { ContractStats } from '@/lib/types'
 
 export function ContractsBurningMostStepsTable({
   data,
   colors,
 }: {
-  data: ContractBySteps[]
+  data: ContractStats[]
   colors: string[]
 }) {
-  const formatNumber = (num: number) => {
-    if (num < 1000) {
+  const formatNumber = (num: bigint) => {
+    if (Number(num) < 1000) {
       return num.toString()
-    } else if (num < 1000000) {
-      return (num / 1000).toFixed(2) + 'K'
-    } else if (num < 1000000000) {
-      return (num / 1000000).toFixed(2) + 'M'
+    } else if (Number(num) < 1000000) {
+      return (Number(num) / 1000).toFixed(2) + 'K'
+    } else if (Number(num) < 1000000000) {
+      return (Number(num) / 1000000).toFixed(2) + 'M'
     } else {
-      return (num / 1000000000).toFixed(2) + 'B'
+      return (Number(num) / 1000000000).toFixed(2) + 'B'
     }
   }
 
@@ -74,9 +74,11 @@ export function ContractsBurningMostStepsTable({
                           style={{ backgroundColor: colors[index] }}
                           className={`w-2 h-2 rounded-full`}
                         ></div>
-                        {item.contractName
-                          ? item.contractName
-                          : `${item.contractAddress.slice(0, 5)}...${item.contractAddress.slice(-4)}`}
+                        <span className=" whitespace-nowrap">
+                          {item.contractName
+                            ? item.contractName
+                            : `${item.contractAddress.slice(0, 5)}...${item.contractAddress.slice(-4)}`}
+                        </span>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent

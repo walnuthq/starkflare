@@ -1,4 +1,4 @@
-import { ContractBySteps } from '@/lib/types'
+import { ContractStats } from '@/lib/types'
 import {
   Cell,
   Pie,
@@ -11,7 +11,7 @@ export function ContractsPieChart({
   data,
   colors,
 }: {
-  data: ContractBySteps[]
+  data: ContractStats[]
   colors: string[]
 }) {
   const renderTooltipContent = (data: any) => {
