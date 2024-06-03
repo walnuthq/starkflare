@@ -13,11 +13,12 @@ import {
   FailedTxs,
   ContractsStats,
   EntrypointsStats,
-} from "@/components/stats";
-import Header from "@/components/header";
-import { Flamegraph } from "@/components/flamegraph";
-import Footer from "@/components/footer";
-import { CommonStats } from "@/lib/types";
+} from '@/components/stats'
+import Header from '@/components/header'
+import { Flamegraph } from '@/components/flamegraph'
+import Footer from '@/components/footer'
+import { CommonStats } from '@/lib/types'
+import { Toaster } from '@/components/ui/toaster'
 import ContributeBox from "./ContributeBox";
 
 export default function HomePage({
@@ -66,7 +67,7 @@ export default function HomePage({
           </div>
           <div className="flex flex-col mt-10 gap-4">
             <div className="flex flex-row gap-4">
-              <ContractsStats className="basis-1/2" />
+              <ContractsStats commonStats={commonStats} className="basis-1/2" />
               <EntrypointsStats className="basis-1/2" />
             </div>
             <div>
@@ -76,6 +77,7 @@ export default function HomePage({
         </div>
       </main>
       <ContributeBox />
+      <Toaster />
       <Footer />
     </div>
   );
