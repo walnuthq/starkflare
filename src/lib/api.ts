@@ -160,8 +160,10 @@ async function updateContractNamesInCommonStats(
 async function fetchContractName(
   contract_address: string,
 ): Promise<string | null> {
+  if (!process.env.VOYAGER_API_KEY) return null
   const response = await fetch(
-    `https://api.voyager.online/beta/contracts/${encodeURIComponent(contract_address)}`,
+    `https://api.voyager.online/beta/contracts/${contract_address}`,
+    { headers: { 'X-API-Key': process.env.VOYAGER_API_KEY } },
   )
   if (!response.ok) {
     return null
