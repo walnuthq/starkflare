@@ -18,6 +18,8 @@ import Header from '@/components/header'
 import { Flamegraph } from '@/components/flamegraph'
 import Footer from '@/components/footer'
 import { CommonStats } from '@/lib/types'
+import { Toaster } from '@/components/ui/toaster'
+import ContributeBox from "./ContributeBox";
 
 export default function HomePage({
   commonStats,
@@ -40,7 +42,10 @@ export default function HomePage({
                 optimise.
               </h2>
             </div>
-            <TxStepsStats className="col-span-4" />
+            <TxStepsStats
+              className="col-span-4"
+              transactionStats={commonStats.transactionStats}
+            />
             <FailedTxs className="col-span-3 row-span-2" />
             <GasSpentStats className="col-span-4" />
             <TotalUsersStats className="col-span-2" commonStats={commonStats} />
@@ -62,7 +67,7 @@ export default function HomePage({
           </div>
           <div className="flex flex-col mt-10 gap-4">
             <div className="flex flex-row gap-4">
-              <ContractsStats className="basis-1/2" />
+              <ContractsStats commonStats={commonStats} className="basis-1/2" />
               <EntrypointsStats className="basis-1/2" />
             </div>
             <div>
@@ -71,7 +76,9 @@ export default function HomePage({
           </div>
         </div>
       </main>
+      <ContributeBox />
+      <Toaster />
       <Footer />
     </div>
-  )
+  );
 }
