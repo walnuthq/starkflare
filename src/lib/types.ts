@@ -9,9 +9,17 @@ export interface TransactionStats {
   stepsNumberLast7Days: number[]
 }
 
+export interface ContractStats {
+  contractAddress: string
+  stepsNumber: bigint
+  stepsPercentage: number
+  contractName: string | null
+}
+
 export interface CommonStats {
   userStats: UserStats
   transactionStats: TransactionStats
+  topContractsBySteps: ContractStats[]
 }
 
 export interface RawEntrypoint {
