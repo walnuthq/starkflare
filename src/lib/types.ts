@@ -4,6 +4,38 @@ export interface UserStats {
   lostUsersLast7Days: number
 }
 
+export interface TransactionStats {
+  transactionsCountLast7Days: number[]
+  stepsNumberLast7Days: number[]
+}
+
+export interface ContractStats {
+  contractAddress: string
+  stepsNumber: bigint
+  stepsPercentage: number
+  contractName: string | null
+}
+
 export interface CommonStats {
   userStats: UserStats
+  transactionStats: TransactionStats
+  topContractsBySteps: ContractStats[]
+}
+
+export interface RawEntrypoint {
+  entrypointSelector: string
+  entrypointSteps: number
+  entrypointStepsPercentage: number
+}
+
+export interface RawEntrypoints {
+  entrypoints: RawEntrypoint[]
+}
+
+export interface Entrypoint extends RawEntrypoint {
+  entrypoint: string
+}
+
+export interface Entrypoints {
+  entrypoints: Entrypoint[]
 }
