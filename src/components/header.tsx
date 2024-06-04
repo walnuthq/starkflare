@@ -1,4 +1,17 @@
 import Image from 'next/image'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 export default function Header() {
   return (
@@ -18,8 +31,27 @@ export default function Header() {
           <a href="/">About</a>
           <a href="/">FAQ</a>
         </div>
-        <div className="flex flex-row gap-8">
+        <div className="flex flex-row gap-8 items-center">
           <div>Network: Starknet Mainnet</div>
+          <div className="relative inline-block group">
+            <Select>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <SelectTrigger className="w-[180px]" disabled>
+                      <SelectValue placeholder="7 days" />
+                    </SelectTrigger>
+                  </TooltipTrigger>
+                  <SelectContent>
+                    <SelectItem value="7">7 days</SelectItem>
+                  </SelectContent>
+                  <TooltipContent>
+                    <p>Currently only 7 day time frame is supported.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </Select>
+          </div>
         </div>
       </div>
     </header>
