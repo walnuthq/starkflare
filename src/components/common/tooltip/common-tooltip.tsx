@@ -12,14 +12,21 @@ type Props = {
   children: ReactNode
   tooltipMessage: ReactNode
   asChild?: boolean
+  delayDuration?: number
 }
 
 export function CommonTooltip(props: Props) {
-  const { className, children, tooltipMessage, asChild, tooltipClassName } =
-    props
+  const {
+    className,
+    children,
+    tooltipMessage,
+    asChild,
+    tooltipClassName,
+    delayDuration = 0,
+  } = props
   return (
     <TooltipProvider>
-      <Tooltip delayDuration={200}>
+      <Tooltip delayDuration={delayDuration}>
         <TooltipTrigger className={className} asChild={asChild}>
           {children}
         </TooltipTrigger>

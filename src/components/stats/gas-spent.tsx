@@ -69,50 +69,56 @@ export function GasSpentStats({
             {formatCompactNumber(total)} ETH
           </CommonTooltip>
         </div>
-        <div className="mt-4 flex-grow">
-          <ResponsiveContainer width="100%" height="100%" debounce={1500}>
-            <BarChart data={transformed} margin={{ bottom: 0 }}>
-              <XAxis
-                dataKey="day"
-                strokeWidth="0px"
-                fontSize={'10px'}
-                fontWeight={500}
-                interval={0}
-              />
-              <Tooltip
-                formatter={(value, name) => [
-                  `${capitalise(name.toString())}: ${value} ETH`,
-                ]}
-                allowEscapeViewBox={{ x: true, y: true }}
-                separator=""
-                labelFormatter={(label, payload) => {
-                  const { startDateString, endDateString } = getUTCDateRange(
-                    payload[0]?.payload?.date,
-                  )
-                  return (
-                    <>
-                      <p>{label}</p>
-                      <p className="mt-2 mb-1 font-medium text-xs">
-                        Date Range:
-                      </p>
-                      <p className="text-xs font-normal whitespace-pre-wrap">
-                        {startDateString + '\n' + endDateString}
-                      </p>
-                    </>
-                  )
-                }}
-              />
-              <Bar
-                dataKey="gas"
-                style={
-                  {
-                    fill: 'hsl(var(--primary))',
-                    opacity: 1,
-                  } as CSSProperties
-                }
-              />
-            </BarChart>
-          </ResponsiveContainer>
+        <div className="mt-4 flex-grow h-36">
+          {transformed.length === 0 ? (
+            <div className="flex rounded-xl border border-black/10 text-black/45 items-center justify-center h-full">
+              <p>No Data</p>
+            </div>
+          ) : (
+            <ResponsiveContainer width="100%" height="100%" debounce={1500}>
+              <BarChart data={transformed} margin={{ bottom: 0 }}>
+                <XAxis
+                  dataKey="day"
+                  strokeWidth="0px"
+                  fontSize={'10px'}
+                  fontWeight={500}
+                  interval={0}
+                />
+                <Tooltip
+                  formatter={(value, name) => [
+                    `${capitalise(name.toString())}: ${value} ETH`,
+                  ]}
+                  allowEscapeViewBox={{ x: true, y: true }}
+                  separator=""
+                  labelFormatter={(label, payload) => {
+                    const { startDateString, endDateString } = getUTCDateRange(
+                      payload[0]?.payload?.date,
+                    )
+                    return (
+                      <>
+                        <p>{label}</p>
+                        <p className="mt-2 mb-1 font-medium text-xs">
+                          Date Range:
+                        </p>
+                        <p className="text-xs font-normal whitespace-pre-wrap">
+                          {startDateString + '\n' + endDateString}
+                        </p>
+                      </>
+                    )
+                  }}
+                />
+                <Bar
+                  dataKey="gas"
+                  style={
+                    {
+                      fill: 'hsl(var(--primary))',
+                      opacity: 1,
+                    } as CSSProperties
+                  }
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </CardContent>
     </Card>
