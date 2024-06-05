@@ -4,6 +4,12 @@ export interface UserStats {
   lostUsersLast7Days: number
 }
 
+export interface L1GasSpent {
+  date: string
+  l1DataGas: number
+  l1Gas: number
+}
+
 export interface TransactionStats {
   transactionsCountLast7Days: number[]
   stepsNumberLast7Days: number[]
@@ -18,6 +24,7 @@ export interface ContractStats {
 
 export interface CommonStats {
   userStats: UserStats
+  l1GasStats: L1GasSpent[]
   transactionStats: TransactionStats
   topContractsBySteps: ContractStats[]
 }

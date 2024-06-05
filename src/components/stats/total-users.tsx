@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CommonStats } from '@/lib/types'
+import { cn, formatCompactNumber } from '@/lib/utils'
+import { CommonTooltip } from '../common/tooltip'
 
 export function TotalUsersStats({
   className,
@@ -9,20 +11,33 @@ export function TotalUsersStats({
   commonStats: CommonStats
 }) {
   return (
-    <Card className={className}>
+    <Card className={cn('flex flex-col justify-between', className)}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-normal">Total Users</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="text-3xl font-semibold mt-10">
-          {commonStats.userStats.uniqueUsersLast7Days}
+      <CardContent className="flex flex-col">
+        <div className="text-5xl font-bold">
+          <CommonTooltip
+            tooltipMessage={`${commonStats.userStats.uniqueUsersLast7Days} Users`}
+          >
+            {formatCompactNumber(commonStats.userStats.uniqueUsersLast7Days)}
+          </CommonTooltip>
         </div>
-        <div className="flex justify-between text-lg font-medium mt-6">
-          <div className="text-green-600">
-            {commonStats.userStats.newUsersLast7Days} new
+        <div className="flex flex-col text-lg font-medium mt-4">
+          <div className="text-green-600 flex-1 whitespace-nowrap">
+            <CommonTooltip
+              tooltipMessage={`${commonStats.userStats.newUsersLast7Days} New Users`}
+            >
+              {formatCompactNumber(commonStats.userStats.newUsersLast7Days)} New
+            </CommonTooltip>
           </div>
-          <div className="text-red-600">
-            {commonStats.userStats.lostUsersLast7Days} lost
+          <div className="text-red-600 flex-1 whitespace-nowrap">
+            <CommonTooltip
+              tooltipMessage={`${commonStats.userStats.lostUsersLast7Days} Lost Users`}
+            >
+              {formatCompactNumber(commonStats.userStats.lostUsersLast7Days)}{' '}
+              Lost
+            </CommonTooltip>
           </div>
         </div>
       </CardContent>
