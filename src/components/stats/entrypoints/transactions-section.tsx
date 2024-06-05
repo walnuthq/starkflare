@@ -112,7 +112,7 @@ export function TransactionsSection(props: TransactionsSectionProps) {
     <div className=" flex flex-col w-full h-full overflow-y-auto styled-scrollbar">
       {entrypoints.length !== 0 ? (
         <>
-          <div className="sticky top-0 z-10 bg-white p-2">
+          <div className="sticky top-0 z-10 bg-white p-2 pb-0">
             <h3 className="text-md font-normal">Transactions</h3>
 
             <CommonSelect
