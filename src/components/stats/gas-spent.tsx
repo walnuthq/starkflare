@@ -1,64 +1,124 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Bar, BarChart, Line, LineChart, ResponsiveContainer } from 'recharts'
+import { CommonStats, L1GasSpent } from '@/lib/types'
+import {
+  capitalise,
+  cn,
+  formatCompactNumber,
+  getDayStringFromDate,
+  getUTCDateRange,
+} from '@/lib/utils'
+import { QuestionMarkCircledIcon } from '@radix-ui/react-icons'
+import { CSSProperties, useMemo } from 'react'
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
+import { CommonTooltip } from '@/components/common/tooltip'
 
-const data = [
-  {
-    revenue: 10400,
-    subscription: 240,
-  },
-  {
-    revenue: 14405,
-    subscription: 300,
-  },
-  {
-    revenue: 9400,
-    subscription: 200,
-  },
-  {
-    revenue: 8200,
-    subscription: 278,
-  },
-  {
-    revenue: 7000,
-    subscription: 189,
-  },
-  {
-    revenue: 9600,
-    subscription: 239,
-  },
-  {
-    revenue: 11244,
-    subscription: 278,
-  },
-]
+type TransformedData = {
+  total: number
+  transformed: Array<{ day: string; gas: number; date: string }>
+}
 
-export function GasSpentStats({ className }: { className?: string }) {
+function getTransformedData(stats: L1GasSpent[]) {
+  return stats.reduce<TransformedData>(
+    (acc, curr) => {
+      return {
+        total: acc.total + curr.l1DataGas,
+        transformed: [
+          ...acc.transformed,
+          {
+            day: getDayStringFromDate(curr.date),
+            gas: curr.l1DataGas,
+            date: curr.date,
+          },
+        ],
+      }
+    },
+    { total: 0, transformed: [] },
+  )
+}
+
+export function GasSpentStats({
+  className,
+  commonStats,
+}: {
+  className?: string
+  commonStats: CommonStats
+}) {
+  const { total, transformed } = useMemo(
+    () => getTransformedData(commonStats?.l1GasStats ?? []),
+    [commonStats?.l1GasStats],
+  )
+
   return (
-    <Card className={className}>
+    <Card className={cn('flex flex-col', className)}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-normal">L1 Gas Spent</CardTitle>
+        <CardTitle className="text-sm font-normal flex justify-between items-center w-full">
+          L1 Gas Spent
+          <CommonTooltip
+            tooltipClassName="whitespace-pre-wrap max-w-44"
+            tooltipMessage={`This tile shows the total amount of gas paid, in ETH, for posting the rollup data and validating its state on L1 Ethereum.`}
+          >
+            <QuestionMarkCircledIcon />
+          </CommonTooltip>
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">17 ETH</div>
-        <p className="text-xs text-muted-foreground">
-          +180.1% from last period
-        </p>
-        <div className="mt-4 h-[80px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data}>
-              <Bar
-                dataKey="subscription"
-                style={
-                  {
-                    fill: 'hsl(var(--primary))',
-                    opacity: 1,
-                  } as React.CSSProperties
-                }
-              />
-            </BarChart>
-          </ResponsiveContainer>
+      <CardContent className="flex flex-col flex-grow">
+        <div className="text-2xl font-bold">
+          <CommonTooltip tooltipMessage={`${total} ETH`}>
+            {formatCompactNumber(total)} ETH
+          </CommonTooltip>
+        </div>
+        <div className="mt-4 flex-grow h-36">
+          {transformed.length === 0 ? (
+            <div className="flex rounded-xl border border-black/10 text-black/45 items-center justify-center h-full">
+              <p>No Data</p>
+            </div>
+          ) : (
+            <ResponsiveContainer width="100%" height="100%" debounce={1500}>
+              <BarChart data={transformed} margin={{ bottom: 0 }}>
+                <XAxis
+                  dataKey="day"
+                  strokeWidth="0px"
+                  fontSize={'10px'}
+                  fontWeight={500}
+                  interval={0}
+                />
+                <Tooltip
+                  formatter={(value, name) => [
+                    `${capitalise(name.toString())}: ${value} ETH`,
+                  ]}
+                  allowEscapeViewBox={{ x: true, y: true }}
+                  separator=""
+                  labelFormatter={(label, payload) => {
+                    const { startDateString, endDateString } = getUTCDateRange(
+                      payload[0]?.payload?.date,
+                    )
+                    return (
+                      <>
+                        <p>{label}</p>
+                        <p className="mt-2 mb-1 font-medium text-xs">
+                          Date Range:
+                        </p>
+                        <p className="text-xs font-normal whitespace-pre-wrap">
+                          {startDateString + '\n' + endDateString}
+                        </p>
+                      </>
+                    )
+                  }}
+                />
+                <Bar
+                  dataKey="gas"
+                  style={
+                    {
+                      fill: 'hsl(var(--primary))',
+                      opacity: 1,
+                    } as CSSProperties
+                  }
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </CardContent>
     </Card>

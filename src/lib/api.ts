@@ -57,7 +57,9 @@ async function fetchCommonStatsWithoutCaching(): Promise<CommonStats> {
   const res = await fetch(`${API_URL}/common-stats`, {
     cache: 'no-store',
   })
-  return (await res.json()) as CommonStats
+  return camelcaseKeys((await res.json()) as any, {
+    deep: true,
+  }) as CommonStats
 }
 
 export async function fetchEntrypoints(

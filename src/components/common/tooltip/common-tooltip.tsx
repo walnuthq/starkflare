@@ -10,18 +10,28 @@ import { ReactNode, useRef } from 'react'
 
 type Props = {
   className?: string
+  tooltipClassName?: string
   children: ReactNode
   tooltipMessage: ReactNode
   asChild?: boolean
   hideOnClick?: boolean
+  delayDuration?: number
 }
 
 export function CommonTooltip(props: Props) {
-  const { className, children, tooltipMessage, asChild, hideOnClick } = props
+  const {
+    className,
+    children,
+    tooltipMessage,
+    asChild,
+    hideOnClick = true,
+    tooltipClassName,
+    delayDuration = 0,
+  } = props
   const triggerRef = useRef(null)
   return (
     <TooltipProvider>
-      <Tooltip delayDuration={0}>
+      <Tooltip delayDuration={delayDuration}>
         <TooltipTrigger
           className={className}
           asChild={asChild}
@@ -33,6 +43,7 @@ export function CommonTooltip(props: Props) {
           {children}
         </TooltipTrigger>
         <TooltipContent
+          className={tooltipClassName}
           onPointerDownOutside={(event) => {
             if (event.target === triggerRef.current && !hideOnClick)
               event.preventDefault()
@@ -43,8 +54,4 @@ export function CommonTooltip(props: Props) {
       </Tooltip>
     </TooltipProvider>
   )
-}
-
-CommonTooltip.defaultProps = {
-  hideOnClick: true,
 }
