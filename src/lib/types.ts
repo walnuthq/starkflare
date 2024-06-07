@@ -29,6 +29,18 @@ export interface CommonStats {
   topContractsBySteps: ContractStats[]
 }
 
+export interface EntrypointData {
+  name: string
+  steps: number
+  usage: number
+}
+
+export interface Transaction {
+  hash: string
+  steps: number
+  timestamp: number
+}
+
 export interface RawEntrypoint {
   entrypointSelector: string
   entrypointSteps: number

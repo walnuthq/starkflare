@@ -5,6 +5,20 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function formatCompactNumber(number: number) {
+  const formatter = new Intl.NumberFormat('en', { notation: 'compact' })
+  return formatter.format(number)
+}
+
+export async function copyToClipboard(text: string): Promise<void> {
+  try {
+    await navigator.clipboard.writeText(text)
+  } catch (err) {
+    console.error('Could not copy text: ', err)
+    throw err
+  }
+}
+
 export function capitalise(str: string) {
   return str[0].toUpperCase() + str.slice(1)
 }
@@ -22,11 +36,6 @@ export function getDayStringFromDate(date: string | Date): string {
   ]
   const dayIndex = new Date(date).getUTCDay()
   return days[dayIndex]
-}
-
-export function formatCompactNumber(number: number) {
-  const formatter = Intl.NumberFormat('en', { notation: 'compact' })
-  return formatter.format(number)
 }
 
 export function getUTCDateRange(date: string | Date) {

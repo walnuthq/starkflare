@@ -12,14 +12,14 @@ import {
   TotalUsersStats,
   FailedTxs,
   ContractsStats,
-  EntrypointsStats,
 } from '@/components/stats'
 import Header from '@/components/header'
 import { Flamegraph } from '@/components/flamegraph'
 import Footer from '@/components/footer'
 import { CommonStats } from '@/lib/types'
+import { EntrypointsStats } from '@/components/stats/entrypoints'
 import { Toaster } from '@/components/ui/toaster'
-import ContributeBox from "./ContributeBox";
+import ContributeBox from './ContributeBox'
 
 export default function HomePage({
   commonStats,
@@ -80,5 +80,5 @@ export default function HomePage({
       <Toaster />
       <Footer />
     </div>
-  );
+  )
 }
