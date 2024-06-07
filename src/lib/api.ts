@@ -89,12 +89,9 @@ async function fetchEntrypointsWithCaching(
 
   const provider = new RpcProvider({ nodeUrl: constants.NetworkName.SN_MAIN })
   const [res, compressedContract] = await Promise.all([
-    fetch(
-      `${RPC_URL}/get_entrypoints?contract_address_param=${contractAddress}`,
-      {
-        cache: 'no-store',
-      },
-    ),
+    fetch(`${RPC_URL}/get_entrypoints?contract_address=${contractAddress}`, {
+      cache: 'no-store',
+    }),
     provider.getClassAt(contractAddress),
   ])
 
